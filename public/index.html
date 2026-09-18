@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Appointment Booking System</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <header class="topbar">
+    <div>
+      <h1>Appointment Booking</h1>
+      <p>Schedule your appointment in a few simple steps.</p>
+    </div>
+
+    <div class="status-badge">
+      <span></span>
+      Online
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- PROVIDER -->
+    <section class="card">
+
+      <div class="section-heading">
+        <div>
+          <h2>Choose Provider</h2>
+          <p>Select a provider and view available appointments.</p>
+        </div>
+      </div>
+
+      <div id="providersContainer" class="provider-grid">
+        <p class="loading">Loading providers...</p>
+      </div>
+
+    </section>
+
+    <!-- BOOKING -->
+    <section class="card">
+
+      <div class="section-heading">
+        <div>
+          <h2>Book an Appointment</h2>
+          <p>Choose a date and an available 30-minute time slot.</p>
+        </div>
+      </div>
+
+      <div class="booking-layout">
+
+        <div class="form-panel">
+
+          <label for="appointmentDate">
+            Appointment Date
+          </label>
+
+          <input
+            type="date"
+            id="appointmentDate"
+          >
+
+          <label for="clientName">
+            Your Name
+          </label>
+
+          <input
+            type="text"
+            id="clientName"
+            placeholder="Enter your full name"
+          >
+
+          <label for="clientEmail">
+            Email Address
+          </label>
+
+          <input
+            type="email"
+            id="clientEmail"
+            placeholder="you@example.com"
+          >
+
+          <button
+            id="bookButton"
+            class="primary-button"
+          >
+            Confirm Booking
+          </button>
+
+        </div>
+
+        <div class="slots-panel">
+
+          <div class="slots-header">
+            <h3>Available Slots</h3>
+            <span id="timezoneText"></span>
+          </div>
+
+          <div
+            id="slotsContainer"
+            class="slots-grid"
+          >
+            <p class="empty">
+              Select a provider and date.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- CONFIRMATION -->
+    <section
+      id="confirmationCard"
+      class="card confirmation-card hidden"
+    >
+      <div class="success-icon">✓</div>
+
+      <h2>Appointment Confirmed!</h2>
+
+      <div id="confirmationDetails"></div>
+
+      <button
+        class="secondary-button"
+        onclick="loadAppointments()"
+      >
+        View Appointments
+      </button>
+    </section>
+
+    <!-- PROVIDER AVAILABILITY -->
+    <section class="card">
+
+      <div class="section-heading">
+        <div>
+          <h2>Provider Availability</h2>
+          <p>
+            Configure the provider's weekly working hours.
+          </p>
+        </div>
+      </div>
+
+      <div
+        id="availabilityContainer"
+        class="availability-grid"
+      >
+        <p class="loading">
+          Loading availability...
+        </p>
+      </div>
+
+    </section>
+
+    <!-- APPOINTMENTS -->
+    <section class="card">
+
+      <div class="section-heading">
+
+        <div>
+          <h2>Appointment Management</h2>
+          <p>
+            View, cancel and reschedule appointments.
+          </p>
+        </div>
+
+        <button
+          class="secondary-button"
+          onclick="loadAppointments()"
+        >
+          Refresh
+        </button>
+
+      </div>
+
+      <div
+        id="appointmentsContainer"
+        class="appointments-list"
+      >
+        <p class="loading">
+          Loading appointments...
+        </p>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- RESCHEDULE MODAL -->
+  <div
+    id="rescheduleModal"
+    class="modal hidden"
+  >
+
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h2>Reschedule Appointment</h2>
+
+        <button
+          class="close-button"
+          onclick="closeRescheduleModal()"
+        >
+          ×
+        </button>
+      </div>
+
+      <label for="rescheduleDate">
+        New Date
+      </label>
+
+      <input
+        type="date"
+        id="rescheduleDate"
+      >
+
+      <div id="rescheduleSlots" class="slots-grid">
+      </div>
+
+      <button
+        id="rescheduleButton"
+        class="primary-button"
+      >
+        Confirm Reschedule
+      </button>
+
+    </div>
+
+  </div>
+
+  <div
+    id="toast"
+    class="toast"
+  ></div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
